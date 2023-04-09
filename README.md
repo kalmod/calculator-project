@@ -10,9 +10,12 @@ This is the Calculator Project from the Odin Project.
   - Create Calculator Screen
     - May need to use z-index on Screen if I try to establish depth.
     - Set Font for Screen.
+    - Character limit??
   - Create Calculator Buttons
     - Buttons should animate on click.
     - Numbers, Operations, Equals/Enter, Clear
+    - Generate buttons automatically with JS.
+      - translation distnace is based off of half of height & width. Must grab both using js and apply.
 
 2. Configure CSS Behavior.
   - Create the following functions:

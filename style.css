@@ -1,3 +1,8 @@
+:root{
+    --bheight: 100%;
+    --bwidth: 100%;
+}
+
 *,*::after, *::before{
     box-sizing: border-box;
 }
@@ -17,7 +22,7 @@ body{
     position: relative;
     transform-style: preserve-3d;
     caret-color: transparent;
-    transform: rotateX(16deg) rotateY(-5deg);
+    transform: rotateX(-14deg) rotateY(-15deg);
 }
 
 #calc-container{
@@ -28,50 +33,331 @@ body{
     left: -6em;
     bottom: -10em;
     transform-style: preserve-3d;
-    transform: rotateX(9deg) rotateY(-15deg);
+    /* transform: rotateX(9deg) rotateY(-15deg); */
 }
 
-.front, .right, .back,.left,.top,.bottom{
+#calc-container > .front, #calc-container > .right, #calc-container > .back,#calc-container > .left,#calc-container > .top,#calc-container > .bottom{
     position: absolute;
     height: 100%;
     background-color: lightcyan;
 
 }
 
-.front, .back{
+#calc-container > .front, #calc-container > .back{
     width: 100%;
 }
 
-.front{
+#calc-container > .front{
     transform: translateZ(1em);
     background-color: teal;
+    transform-style: preserve-3d;
 }
-.back{
+#calc-container > .back{
     transform: rotateY(180deg) translateZ(1em);
     background-color: olive;
 }
-.right, .left{
+#calc-container > .right, #calc-container > .left{
     background-color: red;
     width: calc((2/12)*100%);
 }
 
-.right{
+#calc-container > .right{
     transform: rotateY(90deg) translateZ(11em);
 }
-.left{
+#calc-container > .left{
     transform: rotateY(270deg) translateZ(1em);
 }
 
 
-.top,.bottom{
+#calc-container > .top, #calc-container > .bottom{
     background-color: pink;
     width: 100%;
     height: 2em;
 }
-.top{
+#calc-container > .top{
     transform: rotateX(90deg) translateZ(1em);
 }
 
-.bottom{
+#calc-container > .bottom{
     transform: rotateX(270deg) translateZ(19em);
 }
+
+#screen-container{
+    height: 30%;
+    width: 100%;
+    background-color: brown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.screen{
+    background-color: aliceblue;
+    width: 90%;
+    height: 70%;
+}
+#keypad-container{
+    position: absolute;
+    width: 100%;
+    height: 70%;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightblue;
+
+}
+#keypad{
+    transform-style: preserve-3d;
+    background-color: lightblue;
+    width: 100%;
+    height: 98%;
+    gap: .25em;
+    display: grid;
+    grid-template-areas: 
+    "clear div multi min"
+    "n7 n8 n9 plus"
+    "n4 n5 n6 plus"
+    "n1 n2 n3 equals"
+    "zero0 zero0 deci equals";
+    grid-template-columns: repeat(auto-fit, 60px);
+    grid-template-rows: repeat(auto-fit,60px);
+    justify-content: center;
+}
+#keypad > div{
+    background-color: aliceblue;
+    transform-style: preserve-3d;
+}
+#keypad > div:not(.num), 
+#keypad > .num > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* #keypad > .clear{
+    grid-area: clr;
+}
+#keypad > .div{
+    grid-area: div;
+}
+#keypad > .multi{
+    grid-area: multi;
+}
+#keypad > .min{
+    grid-area: min;
+}
+#keypad > .plus{
+    grid-area: plus;
+}
+#keypad > .equals{
+    grid-area: equals;
+}
+#keypad > .zero0{
+    grid-area: zero0;
+}
+#keypad > .deci{
+    grid-area: deci;
+} */
+
+/* #keypad > .num{
+    grid-area: num;
+    display: grid;
+    gap: .2em;
+    grid-template-areas: 
+    "n7 n8 n9"
+    "n4 n5 n6"
+    "n1 n2 n3";
+}
+
+#keypad > .num > div{
+    background-color: brown;
+} */
+
+
+
+.buttonCube{
+    position: relative;
+    transform-style: preserve-3d;
+    width: 100%;
+    height: 10%;
+    transform: rotateX(-90deg) translateY(-50%);
+}
+.buttonCube > .front, .buttonCube >.back{
+    position: absolute;
+    width:100%;
+    height: 100%;
+    background-color: rgba(154,192,205,1);
+}
+
+.buttonCube > .right, .buttonCube >.left{
+    position: absolute;
+    width:100%;
+    height: 100%;
+    background-color: rgba(154,192,205,1);
+}
+.buttonCube > .front {
+    transform: translateZ(30px);
+}
+.buttonCube > .right {
+    transform: rotateY(90deg) translateZ(30px);
+}
+.buttonCube > .back {
+    transform: rotateY(180deg) translateZ(30px);
+}
+.buttonCube > .left {
+    transform: rotateY(270deg) translateZ(30px);
+}
+
+.buttonCube > .top {
+    height: 60px;
+    width: 60px;
+    background-color: rgba(154,192,205,1);
+    transform: rotateX(90deg) translateZ(30px);
+}
+
+.click-animation{
+    animation: clicker .25s linear;
+}
+
+@keyframes clicker {
+    0%, 100%{ height: 10%; }
+    50% { height: 5%; }
+}
+
+/*Attempt 3 */
+/* 
+
+.buttonCube > .front, .buttonCube >.back{
+position: absolute;
+    width: 100%;
+    height: var(--bheight);
+    background-color: lightblue;
+}
+
+.buttonCube >.right, .buttonCube >.left{
+    position: absolute;
+    width: var(--bwidth);
+    height: 100%;
+    background-color: lightblue;
+}
+
+.buttonCube >.front{
+    bottom: 0;
+    transform-origin: bottom;
+    transform: rotateX(-90deg);
+}
+
+.buttonCube >.right{
+    bottom: 0;
+    right: 0;
+    transform-origin: right;
+    transform: rotateY(90deg);
+}
+.buttonCube >.left{
+    bottom: 0;
+    transform-origin: left;
+    transform: rotateY(-90deg);
+}
+.buttonCube >.back{
+    top: 0;
+    transform-origin: top;
+    transform: rotateX(90deg);
+}
+
+.buttonCube >.top{
+    width: 100%;
+    height: 100%;
+    background-color: purple;
+    transform: rotateX(90deg) translateY(100%) rotateX(90deg)
+} */
+
+
+/* Attemp 2 */
+
+/* .buttonCube > .front{
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    bottom: 0;
+    background-color: purple;
+    transform-origin: bottom center;
+    transform: rotateX(-90deg);
+}
+.buttonCube > .right{
+    position: absolute;
+    height: 10%;
+    width: 93%;
+    right: 0;
+    top: -10%;
+    background-color: yellow;
+    transform-origin: right bottom;
+    transform: rotateX(-90deg) rotateY(90deg);
+}
+
+.buttonCube > .left{
+    position: absolute;
+    height: 10%;
+    width: 93%;
+    top: -10%;
+    background-color: yellow;
+    transform-origin: left bottom;
+    transform: rotateX(-90deg) rotateY(-90deg);
+}
+
+.buttonCube > .back{
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    top: 0;
+    background-color: purple;
+    transform-origin: top center;
+    transform: rotateX(90deg);
+} 
+
+.buttonCube > .top {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: teal;
+    transform: translateZ(6px);
+} */
+
+
+
+
+/*Attempt 1*/
+/* .buttonCube > .right{
+    position: absolute;
+    height: 100%;
+    width: 10%;
+    right: 0;
+    background-color: yellow;
+    transform-origin: right center;
+    transform: rotateY(90deg);
+} */
+
+/* .buttonCube > .left{
+    position: absolute;
+    height: 100%;
+    width: 8%;
+    left: 0;
+    background-color: yellow;
+    transform-origin: left center;
+    transform: rotateY(-90deg);
+}
+.buttonCube > .back{
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    top: 0;
+    background-color: purple;
+    transform-origin: top center;
+    transform: rotateX(90deg);
+} 
+.buttonCube > .top {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: teal;
+    transform: translateZ(6px);
+} */
