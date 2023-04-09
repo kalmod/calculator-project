@@ -1,0 +1,77 @@
+*,*::after, *::before{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: black;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 25em;
+    font-size: 24px;
+}
+
+#scene{
+    position: relative;
+    transform-style: preserve-3d;
+    caret-color: transparent;
+    transform: rotateX(16deg) rotateY(-5deg);
+}
+
+#calc-container{
+    position: absolute;
+    background-color: lightcyan;
+    height: 20em;
+    width: 12em;
+    left: -6em;
+    bottom: -10em;
+    transform-style: preserve-3d;
+    transform: rotateX(9deg) rotateY(-15deg);
+}
+
+.front, .right, .back,.left,.top,.bottom{
+    position: absolute;
+    height: 100%;
+    background-color: lightcyan;
+
+}
+
+.front, .back{
+    width: 100%;
+}
+
+.front{
+    transform: translateZ(1em);
+    background-color: teal;
+}
+.back{
+    transform: rotateY(180deg) translateZ(1em);
+    background-color: olive;
+}
+.right, .left{
+    background-color: red;
+    width: calc((2/12)*100%);
+}
+
+.right{
+    transform: rotateY(90deg) translateZ(11em);
+}
+.left{
+    transform: rotateY(270deg) translateZ(1em);
+}
+
+
+.top,.bottom{
+    background-color: pink;
+    width: 100%;
+    height: 2em;
+}
+.top{
+    transform: rotateX(90deg) translateZ(1em);
+}
+
+.bottom{
+    transform: rotateX(270deg) translateZ(19em);
+}
