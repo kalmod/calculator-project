@@ -36,4 +36,11 @@ This is the Calculator Project from the Odin Project.
   - Decimal numbers.
   - Add button to control position of calculator.
 
-  [W3Schools Arrows](https://www.w3schools.com/howto/howto_css_arrows.asp)
+#### BUGS
+
+Looks like a bug is happening with rotation locking out at certain degrees. Occurs primarily when moving left to right. (yaxis)
+I think this is known as Gimbal Lock. Possible solutions are:
+  - Using Quaternions. Might have to use a 3d package like three.js
+  - Using axis-angle rotation to represent a rotation in 3d space.
+
+[W3Schools Arrows](https://www.w3schools.com/howto/howto_css_arrows.asp)

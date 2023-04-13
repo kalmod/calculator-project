@@ -176,7 +176,7 @@ upBTN.addEventListener('mousedown', function (e){
         const sceneStyle = getComputedStyle(scene).getPropertyValue('transform');
         const matrix = sceneStyle.split('(')[1].split(')')[0].split(',');
         let [ x,y,z ] = getDegreesFromMatrix(matrix);
-        scene.style.transform = `rotateX(${x+5}deg) rotateY(${y}deg)`;
+        scene.style.transform = `rotateX(${x+5}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
     },75)
 });
 upBTN.addEventListener('mouseup', function (e){
@@ -190,7 +190,7 @@ downBTN.addEventListener('mousedown', function(e){
         const sceneStyle = getComputedStyle(scene).getPropertyValue('transform');
         const matrix = sceneStyle.split('(')[1].split(')')[0].split(',');
         let [ x,y,z ] = getDegreesFromMatrix(matrix);
-        scene.style.transform = `rotateX(${x-5}deg) rotateY(${y}deg)`;
+        scene.style.transform = `rotateX(${x-5}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
     },75)
 });
 downBTN.addEventListener('mouseup', function(e){
@@ -205,7 +205,9 @@ leftBTN.addEventListener('mousedown', function(e){
         const sceneStyle = getComputedStyle(scene).getPropertyValue('transform');
         const matrix = sceneStyle.split('(')[1].split(')')[0].split(',');
         let [ x,y,z ] = getDegreesFromMatrix(matrix);
-        scene.style.transform = `rotateX(${x}deg) rotateY(${y-5}deg)`;
+        console.log(x,y,z);
+        console.log(matrix);
+        scene.style.transform = `rotateX(${x}deg) rotateY(${y-5}deg) rotateZ(${z}deg)`;
     },75)
 });
 leftBTN.addEventListener('mouseup', function(e){
@@ -220,7 +222,9 @@ rightBTN.addEventListener('mousedown', function(e){
         const sceneStyle = getComputedStyle(scene).getPropertyValue('transform');
         const matrix = sceneStyle.split('(')[1].split(')')[0].split(',');
         let [ x,y,z ] = getDegreesFromMatrix(matrix);
-        scene.style.transform = `rotateX(${x}deg) rotateY(${y+5}deg)`;
+        console.log(x,y,z);
+        console.log(matrix);
+        scene.style.transform = `rotateX(${x}deg) rotateY(${y+5}deg) rotateZ(${z}deg)`;
     },75);
 });
 rightBTN.addEventListener('mouseup', function(e){
@@ -232,27 +236,37 @@ rightBTN.addEventListener('mouseleave', function(e){
 
 
 function getDegreesFromMatrix(matrix){
-
+    if (matrix.length === 6){
+        const angleY = -Math.asin(matrix[2]);
+        const angleX = Math.atan2(matrix[1] / Math.cos(angleY), matrix[0] / Math.cos(angleY));
+        return [angleX, angleY, 0]
+    }
     const radToDeg = (rad) => rad * 180 / Math.PI;
 
-    const a11 = matrix[0];
-    const a12 = matrix[1];
-    const a13 = matrix[2];
-    const a21 = matrix[4];
-    const a22 = matrix[5];
-    const a23 = matrix[6];
-    const a31 = matrix[8];
-    const a32 = matrix[9];
-    const a33 = matrix[10];
+    const a11 = parseFloat(matrix[0]);
+    const a12 = parseFloat(matrix[1]);
+    const a13 = parseFloat(matrix[2]);
+    const a21 = parseFloat(matrix[4]);
+    const a22 = parseFloat(matrix[5]);
+    const a23 = parseFloat(matrix[6]);
+    const a31 = parseFloat(matrix[8]);
+    const a32 = parseFloat(matrix[9]);
+    const a33 = parseFloat(matrix[10]);
 
-    const xRot = radToDeg(Math.atan2(-a32, a33));
-    const yRot = radToDeg(Math.asin(a31));
-    const zRot = radToDeg(Math.atan2(-a21, a11));
+    let xRad = Math.atan2(-a32, a33);
+    let yRad = Math.atan2(-a13,a11);
+    if (yRad === Math.PI/2 || yRad === -Math.PI/2){
+        xRad = Math.atan2(a23,a33);
+    }
+    let zRad = Math.atan2(-a21, a11);
+
+    const xRot = Math.round(radToDeg(xRad));
+    const yRot = Math.round(radToDeg(yRad));
+    const zRot = Math.round(radToDeg(zRad));
 
     const xDeg = (xRot < 0 ) ? xRot + 360  : xRot;
     const yDeg = (yRot < 0 ) ? yRot + 360  : yRot;
     const zDeg = (zRot < 0 ) ? zRot + 360 : zRot;
-
     return [xDeg, yDeg, zDeg]
 
 }
